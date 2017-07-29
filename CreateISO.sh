@@ -39,7 +39,7 @@ read UbuntuBit
 
 echo "Downloading Distro"
 chmod -R 0777 /opt
-#wget http://releases.ubuntu.com/$UbuntuDistroVer/ubuntu-$UbuntuDistroVer-$UbuntuDistro-$UbuntuBit.iso -P /opt
+wget http://releases.ubuntu.com/$UbuntuDistroVer/ubuntu-$UbuntuDistroVer-$UbuntuDistro-$UbuntuBit.iso -P /opt
 
 echo "System Language for the install?"
 echo " 'locale' running this Command shows your Current System Setting Format"
