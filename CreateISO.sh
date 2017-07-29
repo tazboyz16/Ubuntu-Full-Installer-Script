@@ -392,11 +392,11 @@ case $InstallSinusbot in
     ;;
 esac
 
-case UbuntuDistro in
+case $UbuntuDistro in
   desktop|Desktop)
       echo "Install Kodi?"
       read InstallKodi
-        case InstallKodi in
+        case $InstallKodi in
         y|Y|yes|Yes)
           sed -i "s#abash#bash#" /opt/serveriso/myapps/FirstbootInstall.sh
           ;;
