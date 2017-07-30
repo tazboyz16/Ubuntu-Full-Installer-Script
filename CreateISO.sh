@@ -60,8 +60,9 @@ cd /opt/serveriso
 echo $SystemLanguage >isolinux/langlist 
 #edit /opt/serveriso/isolinux/txt.cfg  At the end of the append line add ks=cdrom:/ks.cfg. You can remove quiet — and vga=788
 sed -i "s#initrd.gz#initrd.gz ks=cdrom:/ks.cfg#" /opt/serveriso/isolinux/txt.cfg
+#edit isolinux.cfg for the timeout option to allow a count down to auto start the installer for about 2 seconds
+sed -i "s#timeout 0#timeout 10#" /opt/serveriso/isolinux/isolinux.cfg
 
-#Above Coding works
 
 cd /opt && git clone https://github.com/tazboyz16/Ubuntu-Server-Auto-Install.git
 cd /opt/Ubuntu-Server-Auto-Install
@@ -98,7 +99,8 @@ sed -i "s#xxxusernamexxx#$AdminUsername#g" /opt/serveriso/ks.cfg
 echo "Admin Account Password ?"
 read AdminPassword
 sed -i "s#xxxpasswordxxx#$AdminPassword#" /opt/serveriso/ks.cfg
-AdminPasswordcrypt=$(openssl passwd -1 pass:$AdminPassword)
+RandomSalt=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-8})
+AdminPasswordcrypt=$(openssl passwd -1 -salt $RandomSalt $AdminPassword)
 
 echo "Is the password already Ubuntu encrypted?"
 read AdminPasswd1
@@ -421,4 +423,4 @@ read UbuntuLabel
 sudo mkisofs -D -r -V "$UbuntuLabel" -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o /opt/$UbuntuLabel.iso /opt/serveriso
 sudo chmod -R 777 /opt
 
-echo "Done!!!  Enjoy!!!"
+echo "Done Creating Custom Ubuntu Server ISO!!!  Enjoy!!!"
