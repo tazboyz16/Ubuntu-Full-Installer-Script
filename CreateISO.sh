@@ -394,25 +394,6 @@ case $InstallSinusbot in
     ;;
 esac
 
-case $UbuntuDistro in
-  desktop|Desktop)
-      echo "Install Kodi?"
-      read InstallKodi
-        case $InstallKodi in
-        y|Y|yes|Yes)
-          sed -i "s#abash#bash#" /opt/serveriso/myapps/FirstbootInstall.sh
-          ;;
-        *)
-          sed -i "s#Kodi-install.sh#  #" /opt/serveriso/myapps/FirstbootInstall.sh
-          ;;
-        esac
-    ;;
-  *)
-    sed -i "s#Kodi-install.sh#  #" /opt/serveriso/myapps/FirstbootInstall.sh
-    ;;
-esac
-
-
 
 #https://www.cyberciti.biz/tips/linux-unix-pause-command.html
 echo "Pausing in Case for extra edits of myapps"
