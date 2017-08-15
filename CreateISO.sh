@@ -15,11 +15,16 @@ if [[ $EUID -ne 0 ]]; then
    echo "This script must be run as root"
    exit 1
 fi
+
+
 rm -r /opt/serveriso
 rm -r /opt/Ubuntu-Server-Auto-Install
-#rm /opt/ubuntu-*.iso
+rm /opt/ubuntu-*.iso
 
 apt install git-core genisoimage -y
+
+read -p "Press [Enter] key to Continue"
+
 clear
 echo "Fully Automated Script to Download Your Ubuntu ISO, "
 echo "Unpack it, edit the MyApps Scripts and then ReImage the ISO back together for you"
