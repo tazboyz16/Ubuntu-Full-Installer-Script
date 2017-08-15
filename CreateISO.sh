@@ -10,21 +10,17 @@
 #http://releases.ubuntu.com/16.04.2/ubuntu-16.04.2-server-amd64.iso
 #http://releases.ubuntu.com/16.04.2/ubuntu-16.04.2-server-i386.iso
 
-echo "Checking if Script is Running as Root"
 if [[ $EUID -ne 0 ]]; then
    echo "This script must be run as root"
    exit 1
 fi
-
 
 rm -r /opt/serveriso
 rm -r /opt/Ubuntu-Server-Auto-Install
 rm /opt/ubuntu-*.iso
 
 apt update
-apt install git-core genisoimage -y
-
-read -p "Press [Enter] key to Continue"
+apt install git-core genisoimage mount -y
 
 clear
 echo "Fully Automated Script to Download Your Ubuntu ISO, "
