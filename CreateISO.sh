@@ -36,7 +36,8 @@ echo "What Version of Ubuntu?"
 echo "16.04.3 17.04?"
 read UbuntuDistroVer
 
-echo " i386(32 bit) or amd64 (64 bit) ?"
+echo "What bit version of OS?"
+echo "i386(32 bit) or amd64 (64 bit)"
 read UbuntuBit
 
 echo "Downloading Distro"
