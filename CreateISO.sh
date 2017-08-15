@@ -19,7 +19,7 @@ rm -r /opt/serveriso
 rm -r /opt/Ubuntu-Server-Auto-Install
 #rm /opt/ubuntu-*.iso
 
-apt install git-core genisoimage
+apt install git-core genisoimage -y
 clear
 echo "Fully Automated Script to Download Your Ubuntu ISO, "
 echo "Unpack it, edit the MyApps Scripts and then ReImage the ISO back together for you"
