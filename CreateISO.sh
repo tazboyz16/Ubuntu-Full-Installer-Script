@@ -37,7 +37,7 @@ echo "desktop or server?"
 read UbuntuDistro
 
 echo "What Version of Ubuntu?"
-echo "16.04.2 17.04?"
+echo "16.04.3 17.04?"
 read UbuntuDistroVer
 
 echo " i386(32 bit) or amd64 (64 bit) ?"
