@@ -21,6 +21,7 @@ rm -r /opt/serveriso
 rm -r /opt/Ubuntu-Server-Auto-Install
 rm /opt/ubuntu-*.iso
 
+apt update
 apt install git-core genisoimage -y
 
 read -p "Press [Enter] key to Continue"
