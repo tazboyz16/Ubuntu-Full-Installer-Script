@@ -16,8 +16,6 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 clear
-echo
-echo
 echo "...Checking if there is any leftovers from a Previous Install...
 
 
@@ -35,17 +33,16 @@ if [ -d /opt/ubuntu-*.iso ]; then
 echo "Found ubuntu OS ISO File. Removing"
 rm /opt/ubuntu-*.iso
 fi
-
 echo "Done.."
 sleep 1
 clear
 
 echo "Installing Required Programs to Run Iso Script"
-sleep 1
+sleep 2
 apt update
 apt install git-core genisoimage mount -y
-
 clear
+
 echo "Fully Automated Script to Download Your Ubuntu ISO, "
 echo "Unpack it, edit the MyApps Scripts and then ReImage the ISO back together for you"
 echo " "
