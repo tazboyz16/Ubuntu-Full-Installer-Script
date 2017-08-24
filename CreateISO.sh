@@ -15,8 +15,8 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-echo "...Checking if leftovers from Previous Install...
-...Please Wait"
+echo "...Checking if there is any leftovers from a Previous Install...
+..........Please Wait..........."
 
 		if [ ! -d "$Programloc" ];
 		echo "CouchPotato not installed at '$Programloc'. Update Failed"
