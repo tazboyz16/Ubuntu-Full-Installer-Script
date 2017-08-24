@@ -15,6 +15,13 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
+echo "...Checking if leftovers from Previous Install...
+...Please Wait"
+
+		if [ ! -d "$Programloc" ];
+		echo "CouchPotato not installed at '$Programloc'. Update Failed"
+		exit 0;
+fi
 rm -r /opt/serveriso
 rm -r /opt/Ubuntu-Server-Auto-Install
 rm /opt/ubuntu-*.iso
