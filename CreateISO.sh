@@ -37,7 +37,7 @@ rm /opt/ubuntu-*.iso
 fi
 
 echo "Done.."
-sleep 1
+sleep 15
 clear
 
 echo "Installing Required Programs to Run Iso Script"
