@@ -24,15 +24,12 @@ echo "...Checking if there is any leftovers from a Previous Install...
 ..........................Please Wait..........................."
 
 if [ -d /opt/serveriso ]; then
-echo "Removing Old Config Files"
 rm -r /opt/serveriso
 fi
 if [ -d /opt/Ubuntu-Server-Auto-Install ]; then
-echo "Removing Old Config Files"
 rm -r /opt/Ubuntu-Server-Auto-Install
 fi
 if [ -d /opt/ubuntu-*.iso ]; then
-echo "Removing Old Config Files"
 rm /opt/ubuntu-*.iso
 fi
 
