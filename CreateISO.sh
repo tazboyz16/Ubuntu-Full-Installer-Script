@@ -16,7 +16,11 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 clear
+echo
+echo
 echo "...Checking if there is any leftovers from a Previous Install...
+
+
 ..........................Please Wait..........................."
 
 		if [ ! -d "$Programloc" ];
