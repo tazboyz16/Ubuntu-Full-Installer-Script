@@ -29,9 +29,12 @@ rm -r /opt/serveriso
 rm -r /opt/Ubuntu-Server-Auto-Install
 rm /opt/ubuntu-*.iso
 fi
+echo "Done.."
+sleep 5
+clear
 
-
-
+echo "Installing Required Programs to Run Iso Script"
+sleep 1
 apt update
 apt install git-core genisoimage mount -y
 
