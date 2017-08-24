@@ -17,7 +17,7 @@ fi
 
 clear
 echo "...Checking if there is any leftovers from a Previous Install...
-....................Please Wait....................."
+..........................Please Wait..........................."
 
 		if [ ! -d "$Programloc" ];
 		echo "CouchPotato not installed at '$Programloc'. Update Failed"
