@@ -23,13 +23,14 @@ echo "...Checking if there is any leftovers from a Previous Install...
 
 ..........................Please Wait..........................."
 
-		if [ ! -d "$Programloc" ];
-		echo "CouchPotato not installed at '$Programloc'. Update Failed"
-		exit 0;
-fi
+if [ ! -d /opt/serveriso ] || [ ! -d /opt/Ubuntu-Server-Auto-Install ] || [ ! -d /opt/ubuntu-*.iso ]; then
+echo "Removing Old Config Files"
 rm -r /opt/serveriso
 rm -r /opt/Ubuntu-Server-Auto-Install
 rm /opt/ubuntu-*.iso
+fi
+
+
 
 apt update
 apt install git-core genisoimage mount -y
