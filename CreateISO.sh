@@ -24,17 +24,20 @@ echo "...Checking if there is any leftovers from a Previous Install...
 ..........................Please Wait..........................."
 
 if [ -d /opt/serveriso ]; then
+echo "Found Serveriso Folder. Removing"
 rm -r /opt/serveriso
 fi
 if [ -d /opt/Ubuntu-Server-Auto-Install ]; then
+echo "Found Ubuntu-Server-Auto-Install Folder. Removing"
 rm -r /opt/Ubuntu-Server-Auto-Install
 fi
 if [ -d /opt/ubuntu-*.iso ]; then
+echo "Found ubuntu OS ISO File. Removing"
 rm /opt/ubuntu-*.iso
 fi
 
 echo "Done.."
-sleep 15
+sleep 1
 clear
 
 echo "Installing Required Programs to Run Iso Script"
