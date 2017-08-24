@@ -30,7 +30,7 @@ rm -r /opt/Ubuntu-Server-Auto-Install
 rm /opt/ubuntu-*.iso
 fi
 echo "Done.."
-sleep 5
+sleep 1
 clear
 
 echo "Installing Required Programs to Run Iso Script"
