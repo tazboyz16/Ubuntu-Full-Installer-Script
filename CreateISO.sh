@@ -15,6 +15,8 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
+SCRIPT_PATH="$(dirname "$0")"
+
 clear
 echo "...Checking if there is any leftovers from a Previous Install...
 
@@ -72,7 +74,7 @@ read SystemLanguage
 echo "Setting up ISO Folder"
 sudo mkdir -p /mnt/iso
 cd /opt
-sudo mount -o loop ubuntu-$UbuntuDistroVer-$UbuntuDistro-$UbuntuBit.iso /mnt/iso
+sudo mount -o loop ${SCRIPT_PATH}/ubuntu-$UbuntuDistroVer-$UbuntuDistro-$UbuntuBit.iso /mnt/iso
 sudo mkdir -p /opt/serveriso
 echo "Copying over ISO files"
 sudo cp -rT /mnt/iso /opt/serveriso
