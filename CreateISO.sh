@@ -22,6 +22,7 @@ echo "...Checking if there is any leftovers from a Previous Install...
 
 
 ..........................Please Wait..........................."
+#also create a check for /mnt/iso/md5sum.txt to see if an iso is mounted
 
 if [ -d /opt/serveriso ]; then
 echo "Found Serveriso Folder. Removing"
