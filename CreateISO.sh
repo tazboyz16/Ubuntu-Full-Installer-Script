@@ -73,13 +73,13 @@ echo "ex. en_US is USA English"
 read SystemLanguage
 
 echo "Setting up ISO Folder"
-sudo mkdir -p /mnt/iso
+mkdir -p /mnt/iso
 cd /opt
 sudo mount -o loop /opt/ubuntu-$UbuntuDistroVer-$UbuntuDistro-$UbuntuBit.iso /mnt/iso
-sudo mkdir -p /opt/serveriso
+mkdir -p /opt/serveriso
 echo "Copying over ISO files"
-sudo cp -rT /mnt/iso /opt/serveriso
-sudo chmod -R 777 /opt/serveriso/
+cp -rT /mnt/iso /opt/serveriso
+chmod -R 777 /opt/serveriso/
 cd /opt/serveriso
 
 #(to set default/only Language of installer)
