@@ -10,16 +10,14 @@
 #http://releases.ubuntu.com/16.04.2/ubuntu-16.04.2-server-amd64.iso
 #http://releases.ubuntu.com/16.04.2/ubuntu-16.04.2-server-i386.iso
 
-#Future add a Custom option in the iso version/download section
-
 if [[ $EUID -ne 0 ]]; then
    echo "This script must be run as root"
    exit 1
 fi
 
 clear
-echo "...Checking if there is any leftovers from a Previous Install...
-
+echo "
+...Checking if there is any leftovers from a Previous Install...
 
 ..........................Please Wait..........................."
 #also create a check for /mnt/iso/md5sum.txt to see if an iso is mounted
@@ -56,7 +54,7 @@ echo "desktop or server?"
 read UbuntuDistro
 
 echo "What Version of Ubuntu?"
-echo "16.04.3 17.04?"
+echo "16.04.3 / 17.04 / Custom Iso?"
 read UbuntuDistroVer
 
 echo "What bit version of OS?"
