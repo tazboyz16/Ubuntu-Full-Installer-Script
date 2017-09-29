@@ -123,7 +123,7 @@ sed -i "s#xxxusernamexxx#$AdminUsername#g" /opt/serveriso/ks.cfg
 echo "Admin Account Password ?"
 read AdminPassword
 sed -i "s#xxxpasswordxxx#$AdminPassword#" /opt/serveriso/ks.cfg
-RandomSalt=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-8})
+RandomSalt=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-15})
 AdminPasswordcrypt=$(openssl passwd -1 -salt $RandomSalt $AdminPassword)
 
 echo "Is the password already Ubuntu encrypted?"
