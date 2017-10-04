@@ -107,14 +107,18 @@ mv ks-example.cfg ks.cfg
 echo "Setting up Installer Language"
 sed -i "s#en_US#$SystemLanguage#" /opt/serveriso/ks.cfg
 
-#dpkg-reconfigure keyboard-configuration
 echo "System Keyboard Setup ?"
+#included grep System for Server edition showed LANG and a LANGUAGE location
+currentkeyboard=$(localectl | grep System | grep -Poe "[\w]{2}_[\w]{2}")
+echo "Current Keyboard layout: $currentkeyboard"
 read SystemKeyboard
 sed -i "s#keyboard us#keyboard $SystemKeyboard#" /opt/serveriso/ks.cfg
 
 echo "TimeZone ?"
 echo "if dont know the format for your timezone check out:"
-echo "https://en.wikipedia.org/wiki/List_of_tz_database_time_zones"
+echo "https://en.wikipedia.org/wiki/List_of_tz_database_time_zones for a list of TZ Zones"
+CurrentTZ=$(cat /etc/timezone)
+echo "Current Set TimeZone: $CurrentTZ"
 read TimeZone
 sed -i "s#America/New_York#$TimeZone#" /opt/serveriso/ks.cfg
 
