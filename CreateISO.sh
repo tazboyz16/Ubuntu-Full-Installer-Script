@@ -89,18 +89,13 @@ sed -i "s#initrd.gz#initrd.gz ks=cdrom:/ks.cfg#" /opt/serveriso/isolinux/txt.cfg
 #edit isolinux.cfg for the timeout option to allow a count down to auto start the installer for about 2 seconds
 sed -i "s#timeout 0#timeout 10#" /opt/serveriso/isolinux/isolinux.cfg
 
-
-cd /opt && git clone https://github.com/tazboyz16/Ubuntu-Server-Auto-Install.git
-cd /opt/Ubuntu-Server-Auto-Install
-
-rm README.md
-rm _config.yml
+#Grabbing Install Scripts from another Repo
+git clone https://github.com/tazboyz16/Ubuntu-Server-Auto-Install.git /opt/serveriso
 cd /opt/serveriso
-mv /opt/Ubuntu-Server-Auto-Install/ks-example.cfg /opt/serveriso
-mv /opt/Ubuntu-Server-Auto-Install/myapps /opt/serveriso
+#removing unwanted Repo files
+rm .travis.yml LICENSE README.md _config.yml
 
-echo "Setting up KickStart Config File"
-
+# Setting up KickStart Config File
 echo "Renaming Kickstart Config File"
 mv ks-example.cfg ks.cfg
 
@@ -151,11 +146,14 @@ sed -i "s#size 5000#size $SwapPartition#" /opt/serveriso/ks.cfg
 echo "Editing FirstbootInstall.sh File"
 echo "What Programs to be installed ?"
 
+# Just to renforce FirstbootInstall edit for Program installs
+cd /opt/serveriso/myapps/
+
 echo "Install iRedMail ?"
 read Installiredmail
 case $Installiredmail in
   n|N|no|No)
-    sed -i "s#mailinstaller.sh#  #" /opt/serveriso/myapps/FirstbootInstall.sh
+    sed -e "/mailinstaller.sh/d" FirstbootInstall.sh
     ;;
   *)
     ;;
@@ -166,18 +164,18 @@ echo "If no, No webservers will be installed due to only have Apache2 setup scri
 read InstallApache2
 case $InstallApache2 in
   n|N|no|No)
-    sed -i "s#Apache2-install.sh#  #" /opt/serveriso/myapps/FirstbootInstall.sh
+    sed -e "/Apache2-install.sh/d" FirstbootInstall.sh
     ;;
   *)
     ;;
 esac
 
-echo "Install Cerbot (Lets Encrypt Cert) ?"
-echo "If Apache2 was not Selected to be installed, This will not install properly!!!"
-read InstallCerbot
-case $InstallCerbot in
+echo "Install Certbot (Letsencrypt Cert) ?"
+echo "If Apache2 was not Selected to be installed, This will not install properly!"
+read InstallCertbot
+case $InstallCertbot in
   n|N|no|No)
-    sed -i "s#Certbot.sh#  #" /opt/serveriso/myapps/FirstbootInstall.sh
+    sed -e "/Certbot.sh/d" FirstbootInstall.sh
     ;;
   *)
     ;;
@@ -187,7 +185,7 @@ echo "Install Mysql and PhpMyAdmin ?"
 read InstallMysql
 case $InstallMysql in
   n|N|no|No)
-    sed -i "s#Mysql.sh#  #" /opt/serveriso/myapps/FirstbootInstall.sh
+    sed -e "/Mysql.sh/d" FirstbootInstall.sh
     ;;
   *)
     ;;
@@ -197,7 +195,7 @@ echo "Install Noip2 Client ?"
 read InstallNoip2
 case $InstallNoip2 in
   n|N|no|No)
-    sed -i "s#Noip2Install.sh# #" /opt/serveriso/myapps/FirstbootInstall.sh
+    sed -e "/Noip2Install.sh/d" FirstbootInstall.sh
     ;;
   *)
     ;;
@@ -207,7 +205,7 @@ echo "Install Deluge with web UI ?"
 read InstallDeluge
 case $InstallDeluge in
   n|N|no|No)
-    sed -i "s#deluge_webui.sh#  #" /opt/serveriso/myapps/FirstbootInstall.sh
+    sed -e "/deluge_webui.sh/d" FirstbootInstall.sh
     ;;
   *)
     ;;
@@ -217,7 +215,7 @@ echo "Install CouchPotato ?"
 read InstallCouchPotato
 case $InstallCouchPotato in
   n|N|no|No)
-    sed -i "s#couchpotato-installer.sh#  #" /opt/serveriso/myapps/FirstbootInstall.sh
+    sed -e "/couchpotato-installer.sh/d" FirstbootInstall.sh
     ;;
   *)
     ;;
@@ -227,7 +225,7 @@ echo "Install HeadPhones?"
 read InstallHeadPhones
 case $InstallHeadPhones in
   n|N|no|No)
-    sed -i "s#headphones-installer.sh#  #" /opt/serveriso/myapps/FirstbootInstall.sh
+    sed -e "/headphones-installer.sh/d" FirstbootInstall.sh
     ;;
   *)
     ;;
@@ -237,7 +235,7 @@ echo "Install Mylar ?"
 read InstallMylar
 case $InstallMylar in
   n|N|no|No)
-    sed -i "s#mylar-installer.sh#  #" /opt/serveriso/myapps/FirstbootInstall.sh
+    sed -e "/mylar-installer.sh/d" FirstbootInstall.sh
     ;;
   *)
     ;;
@@ -247,7 +245,7 @@ echo "Install SickRage ?"
 read InstallSickRage
 case $InstallSickRage in
   n|N|no|No)
-    sed -i "s#sickrage-installer.sh#  #" /opt/serveriso/myapps/FirstbootInstall.sh
+    sed -e "/sickrage-installer.sh/d" FirstbootInstall.sh
     ;;
   *)
     ;;
@@ -257,7 +255,7 @@ echo "Install Webmin ?"
 read InstallWebmin
 case $InstallWebmin in
   n|N|no|No)
-    sed -i "s#webmin-installer.sh#  #" /opt/serveriso/myapps/FirstbootInstall.sh
+    sed -e "/webmin-installer.sh/d" FirstbootInstall.sh
     ;;
   *)
     ;;
@@ -267,9 +265,29 @@ echo "Install Plex Media Server?"
 read InstallPlexServer
 case $InstallPlexServer in
   n|N|no|No)
-    sed -i "s#plexupdate.sh#  #" /opt/serveriso/myapps/FirstbootInstall.sh
-    sed -i "s#PlexAddons.sh#  #" /opt/serveriso/myapps/FirstbootInstall.sh
-    ;;
+    sed -e "/plexupdate.sh/d" FirstbootInstall.sh
+    	echo "Install Extra Addons to Plex Like WebTools, SickRage, CouchPotato, SpeedTest, Headphones, SS-Plex and SubZero?"
+	read Webtoolsoption
+	case $Webtoolsoption in
+		n|N|no|No)
+		sed -e "/Webtools.sh/d" FirstbootInstall.sh;;
+		*) ;;
+	esac
+	echo "Install Plexpy?"
+	read Plexpyoption
+	case $Plexpyoption in
+		n|N|no|No)
+		sed -e "/plexpy.sh/d" FirstbootInstall.sh;;
+		*) ;;
+	esac	
+	echo "Install Ombi (Plex Requests) ?"
+	read Ombioption
+	case $Ombioption in
+		n|N|no|No)
+		sed -e "/ombi.sh/d" FirstbootInstall.sh;;
+		*) ;;
+	esac	
+	;;
   *)
     ;;
 esac
@@ -278,7 +296,7 @@ echo "Install Emby Media Server?"
 read InstallEmbyServer
 case $InstallEmbyServer in
   n|N|no|No)
-    sed -i "s#EmbyServerInstall.sh#  #" /opt/serveriso/myapps/FirstbootInstall.sh
+    sed -e "/EmbyServerInstall.sh/d" FirstbootInstall.sh
     ;;
   *)
     ;;
@@ -288,7 +306,7 @@ echo "Install Grive (Google Drive Sync) ?"
 read InstallGrive
 case $InstallGrive in
   n|N|no|No)
-    sed -i "s#GriveInstaller.sh#  #" /opt/serveriso/myapps/FirstbootInstall.sh
+    sed -e "/GriveInstaller.sh/d" FirstbootInstall.sh
     ;;
   *)
     ;;
@@ -298,7 +316,7 @@ echo "Install ZoneMinder?"
 read InstallZoneMinder
 case $InstallZoneMinder in
   n|N|no|No)
-    sed -i "s#zminstall.sh#  #" /opt/serveriso/myapps/FirstbootInstall.sh
+    sed -e "/zminstall.sh/d" FirstbootInstall.sh
     ;;
   *)
     ;;
@@ -308,7 +326,7 @@ echo "Install TeamSpeak 3 Server?"
 read InstallTeamSpeakServer
 case $InstallTeamSpeakServer in
   n|N|no|No)
-    sed -i "s#ts3install.sh#  #" /opt/serveriso/myapps/FirstbootInstall.sh
+    sed -e "/ts3install.sh/d" FirstbootInstall.sh
     ;;
   *)
     ;;
@@ -318,7 +336,7 @@ echo "Install Sonarr?"
 read InstallSonarr
 case $InstallSonarr in
   n|N|no|No)
-    sed -i "s#sonarrinstall.sh#  #" /opt/serveriso/myapps/FirstbootInstall.sh
+    sed -e "/sonarrinstall.sh/d" FirstbootInstall.sh
     ;;
   *)
     ;;
@@ -328,7 +346,7 @@ echo "Install Jackett?"
 read InstallJackett
 case $InstallJackett in
   n|N|no|No)
-    sed -i "s#jackettinstall.sh#  #" /opt/serveriso/myapps/FirstbootInstall.sh
+    sed -e "/jackettinstall.sh/d" FirstbootInstall.sh
     ;;
   *)
     ;;
@@ -338,7 +356,7 @@ echo "Install Samba?"
 read InstallSamba
 case $InstallSamba in
   n|N|no|No)
-    sed -i "s#samba.sh#  #" /opt/serveriso/myapps/FirstbootInstall.sh
+    sed -e "/samba.sh/d" FirstbootInstall.sh
     ;;
   *)
     ;;
@@ -348,7 +366,7 @@ echo "Install Muximux?"
 read InstallMuximux
 case $InstallMuximux in
   n|N|no|No)
-    sed -i "s#Muximuxinstall.sh#  #" /opt/serveriso/myapps/FirstbootInstall.sh
+    sed -e "/Muximuxinstall.sh/d" FirstbootInstall.sh
     ;;
   *)
     ;;
@@ -358,7 +376,7 @@ echo "Install HTPC-Manager?"
 read InstallHTPCManager
 case $InstallHTPCManager in
   n|N|no|No)
-    sed -i "s#HTPCManager.sh#  #" /opt/serveriso/myapps/FirstbootInstall.sh
+    sed -e "/HTPCManager.sh/d" FirstbootInstall.sh
     ;;
   *)
     ;;
@@ -368,7 +386,7 @@ echo "Install LazyLibrarian?"
 read InstallLazyLibrarian
 case $InstallLazyLibrarian in
   n|N|no|No)
-    sed -i "s#Lazylibrarian.sh#  #" /opt/serveriso/myapps/FirstbootInstall.sh
+    sed -e "/Lazylibrarian.sh/d" FirstbootInstall.sh
     ;;
   *)
     ;;
@@ -378,7 +396,7 @@ echo "Install Shinobi?"
 read InstallShinobi
 case $InstallShinobi in
   n|N|no|No)
-    sed -i "s#Shinobi.sh#  #" /opt/serveriso/myapps/FirstbootInstall.sh
+    sed -e "/Shinobi.sh/d" FirstbootInstall.sh
     ;;
   *)
     ;;
@@ -388,7 +406,7 @@ echo "Install MadSonic?"
 read InstallMadSonic
 case $InstallMadSonic in
   n|N|no|No)
-    sed -i "s#MadSonic.sh#  #" /opt/serveriso/myapps/FirstbootInstall.sh
+    sed -e "/MadSonic.sh/d" FirstbootInstall.sh
     ;;
   *)
     ;;
@@ -398,7 +416,7 @@ echo "Install Organizr?"
 read InstallOrganizr
 case $InstallOrganizr in
   n|N|no|No)
-    sed -i "s#Organizr.sh#  #" /opt/serveriso/myapps/FirstbootInstall.sh
+    sed -e "/Organizr.sh/d" FirstbootInstall.sh
     ;;
   *)
     ;;
@@ -408,7 +426,7 @@ echo "Install Ubooquity?"
 read InstallUbooquity
 case $InstallUbooquity in
   n|N|no|No)
-    sed -i "s#Ubooquity.sh#  #" /opt/serveriso/myapps/FirstbootInstall.sh
+    sed -e "/Ubooquity.sh/d" FirstbootInstall.sh
     ;;
   *)
     ;;
@@ -418,7 +436,7 @@ echo "Install Sinusbot?"
 read InstallSinusbot
 case $InstallSinusbot in
   n|N|no|No)
-    sed -i "s#sinusbot.sh#  #" /opt/serveriso/myapps/FirstbootInstall.sh
+    sed -e "/sinusbot.sh/d" FirstbootInstall.sh
     ;;
   *)
     ;;
