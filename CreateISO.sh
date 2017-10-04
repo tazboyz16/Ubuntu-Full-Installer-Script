@@ -302,16 +302,6 @@ case $InstallEmbyServer in
     ;;
 esac
 
-echo "Install Grive (Google Drive Sync) ?"
-read InstallGrive
-case $InstallGrive in
-  n|N|no|No)
-    sed -e "/GriveInstaller.sh/d" FirstbootInstall.sh
-    ;;
-  *)
-    ;;
-esac
-
 echo "Install ZoneMinder?"
 read InstallZoneMinder
 case $InstallZoneMinder in
