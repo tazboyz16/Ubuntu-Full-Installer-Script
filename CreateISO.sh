@@ -45,7 +45,7 @@ apt install git-core genisoimage mount -y
 clear
 
 echo "Fully Automated Script to Download Your Ubuntu ISO, "
-echo "Unpack it, edit the MyApps Scripts and then ReImage the ISO back together for you"
+echo "Unpack it, edit the MyApps Scripts and then Reimage the ISO back together for you"
 echo " "
 echo "Please only answer questions that are y & n with just y & n "
 echo " "
@@ -68,6 +68,8 @@ wget http://releases.ubuntu.com/$UbuntuDistroVer/ubuntu-$UbuntuDistroVer-$Ubuntu
 echo "System Language for the install?"
 echo " 'locale' running this Command shows your Current System Setting Format"
 echo "ex. en_US is USA English"
+currentlang=$(echo $LANG | grep -Poe "[\w]{2}_[\w]{2}")
+echo "Current Lang is: $currentlang"
 read SystemLanguage
 
 echo "Setting up ISO Folder"
