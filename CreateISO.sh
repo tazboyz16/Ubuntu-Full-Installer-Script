@@ -432,6 +432,6 @@ read -p "Press [Enter] key to Continue"
 echo "What Would You like the Disc Labeled As?"
 read UbuntuLabel
 sudo mkisofs -D -r -V "$UbuntuLabel" -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o /opt/$UbuntuLabel.iso /opt/serveriso
-sudo chmod -R 777 /opt
+sudo chmod -R 777 /opt/$UbuntuLabel.iso
 
 echo "Done Creating Custom Ubuntu Server ISO!!!  Enjoy!!!"
