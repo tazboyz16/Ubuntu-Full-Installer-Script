@@ -49,13 +49,18 @@ echo "Unpack it, edit the MyApps Scripts and then Reimage the ISO back together 
 echo " "
 echo "Please only answer questions that are y & n with just y & n "
 echo " "
-echo "What version of Ubuntu?"
-echo "desktop or server?"
-read UbuntuDistro
 
 echo "What Version of Ubuntu?"
 echo "16.04.3 / 17.04 / Custom Iso?"
 read UbuntuDistroVer
+
+#create case/if statement for allowing Cust ISo instead
+
+
+
+echo "What version of Ubuntu?"
+echo "desktop or server?"
+read UbuntuDistro
 
 echo "What bit version of OS?"
 echo "i386(32 bit) or amd64 (64 bit)"
